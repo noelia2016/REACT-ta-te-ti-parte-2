@@ -5,7 +5,7 @@ export default function GameOver({ winner, onRestart }) {
       {winner && <p>{winner} won!</p>}
       {!winner && <p>It&apos;s a draw!</p>}
       <p>
-        <button onClick={onRestart}>Rematch!</button>
+        <button onClick={onRestart}>Jugar nuevamente!!!</button>
       </p>
     </div>
   );
