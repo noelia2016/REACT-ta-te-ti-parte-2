@@ -5,6 +5,7 @@ import GameBoard from './components/GameBoard.jsx';
 import Log from './components/Log.jsx';
 import GameOver from './components/GameOver.jsx';
 import { WINNING_COMBINATIONS } from './winning-combinations.js';
+import Abandonar from './components/Abandonar.jsx';
 
 const PLAYERS = {
   X: 'Player 1',
@@ -126,6 +127,11 @@ function App() {
         )}
         {/** Representa el tablero de juego, pasando el onSelectSquarecontrolador y el boardestado derivado. */}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
+        {/** para abandonar juego 
+         * necesito que cant moviemientos del jugador sea mayor a 1 o que cantidad de movimientos en la grilla supere 2
+         * para poder cancelar el juego
+        */}
+        <Abandonar winner={winner} onRestart={handleRestart} />
       </div>
       <Log turns={gameTurns} />
     </main>

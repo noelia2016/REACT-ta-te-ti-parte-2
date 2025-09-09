@@ -5,12 +5,18 @@ export default function Player({
   symbol,
   isActive,
   onChangeName,
+  cantMov,
 }) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
+  const [cantMov, setContador] = useState(0); // cantidad de movimientos del jugador
+
+  const incrementar = () => {
+    setNumero(cantMov + 1); // Actualiza la variable con el valor incrementado
+  }; 
 
   function handleEditClick() {
-    setIsEditing((editing) => !editing);
+    setIsEditing((editing) => !editing); 
 
     if (isEditing) {
       onChangeName(symbol, playerName);
