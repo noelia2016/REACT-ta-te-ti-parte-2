@@ -88,7 +88,7 @@ function App() {
     });
   }
 
-  // Restablece el gameTurnsestado a una matriz vacía, reiniciando efectivamente el juego.
+  // Restablece el gameTurns estado a una matriz vacía, reiniciando efectivamente el juego.
   function handleRestart() {
     setGameTurns([]);
   }
