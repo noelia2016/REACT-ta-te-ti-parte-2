@@ -40,6 +40,7 @@ function deriveGameBoard(gameTurns) {
   return gameBoard;
 }
 
+/* calcula quien es el ganador del juego devuelve 'X' o 'O'*/
 function deriveWinner(gameBoard, players) {
   let winner;
 
@@ -64,18 +65,19 @@ function deriveWinner(gameBoard, players) {
 }
 
 function App() {
-  const [players, setPlayers] = useState(PLAYERS);
-  const [gameTurns, setGameTurns] = useState([]);
+  const [players, setPlayers] = useState(PLAYERS); // administra los nombres de los jugadores
+  const [gameTurns, setGameTurns] = useState([]); // almacena el historial de movimientos realizados en el juego en una matriz
 
   const activePlayer = deriveActivePlayer(gameTurns);
-  const gameBoard = deriveGameBoard(gameTurns);
-  const winner = deriveWinner(gameBoard, players);
-  const hasDraw = gameTurns.length === 9 && !winner;
+  const gameBoard = deriveGameBoard(gameTurns); // deriva los turnos por 
+  const winner = deriveWinner(gameBoard, players); // Esta función (no proporcionada) verificaría una condición de victoria según la información gameBoardactual players.
+  const hasDraw = gameTurns.length === 9 && !winner; // grilla de 9 casilleros no puede a ver mas mov
 
   function handleSelectSquare(rowIndex, colIndex) {
     setGameTurns((prevTurns) => {
       const currentPlayer = deriveActivePlayer(prevTurns);
 
+      // muestra los turnos del jugador
       const updatedTurns = [
         { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
         ...prevTurns,
@@ -85,10 +87,13 @@ function App() {
     });
   }
 
+  // Restablece el gameTurnsestado a una matriz vacía, reiniciando efectivamente el juego.
   function handleRestart() {
     setGameTurns([]);
   }
 
+  // Actualiza el playersestado cuando un jugador cambia de nombre. 
+  // Usa symbol(p. ej., 'X' u 'O') para identificar el nombre del jugador que se debe actualizar.
   function handlePlayerNameChange(symbol, newName) {
     setPlayers(prevPlayers => {
       return {
@@ -101,7 +106,8 @@ function App() {
   return (
     <main>
       <div id="game-container">
-        <ol id="players" className="highlight-player">
+        {/* muestra los jugadores */}
+        <ol id="players" className="highlight-player"> 
           <Player
             initialName={PLAYERS.X}
             symbol="X"
@@ -118,6 +124,7 @@ function App() {
         {(winner || hasDraw) && (
           <GameOver winner={winner} onRestart={handleRestart} />
         )}
+        {/** Representa el tablero de juego, pasando el onSelectSquarecontrolador y el boardestado derivado. */}
         <GameBoard onSelectSquare={handleSelectSquare} board={gameBoard} />
       </div>
       <Log turns={gameTurns} />
