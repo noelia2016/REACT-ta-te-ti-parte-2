@@ -11,10 +11,6 @@ export default function Player({
   const [isEditing, setIsEditing] = useState(false);
   const [cantMov, setContador] = useState(0); // cantidad de movimientos del jugador
 
-  const incrementar = () => {
-    setNumero(cantMov + 1); // Actualiza la variable con el valor incrementado
-  }; 
-
   function handleEditClick() {
     setIsEditing((editing) => !editing); 
 
@@ -43,7 +39,7 @@ export default function Player({
         {editablePlayerName}
         <span className="player-symbol">{symbol}</span>
       </span>
-      <button onClick={handleEditClick}>{isEditing ? 'Save' : 'Edit'}</button>
+      <button onClick={handleEditClick}>{isEditing ? 'Guadar' : 'Editar'}</button>
     </li>
   );
 }
