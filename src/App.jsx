@@ -76,8 +76,9 @@ function App() {
   const winner = deriveWinner(gameBoard, players); // Esta función (no proporcionada) verificaría una condición de victoria según la información gameBoardactual players.
   const hasDraw = gameTurns.length === 9 && !winner; // grilla de 9 casilleros no puede a ver mas mov
   
-  const [quitTurns, setGameAbandonar]; // para abandonar juego cuento la cant de mov que hicieron los jugadores es mayor a 2
+  // para abandonar juego cuento la cant de mov que hicieron los jugadores es mayor a 2
   // necesito una variable que contabilice cada vez que cambia de jugador para q supere 2 y habilite el boton
+  const [count, setCount] = useState(0); // Inicia el contador de movimientos en 0
 
  // modifico el tablero con la nueva selecion del jugador
   function handleSelectSquare(rowIndex, colIndex) {
@@ -99,7 +100,7 @@ function App() {
     setGameTurns([]); // restablece el estado del tablero en vacio como si se jugara nuevamente
   }
 
-  // Actualiza el playersestado cuando un jugador cambia de nombre. 
+  // Actualiza el players estado cuando un jugador cambia de nombre. 
   // Usa symbol(p. ej., 'X' u 'O') para identificar el nombre del jugador que se debe actualizar.
   function handlePlayerNameChange(symbol, newName) {
     setPlayers(prevPlayers => {
@@ -110,9 +111,19 @@ function App() {
     });
   }
 
+  /** contador a mostrar en la pagina */
+  function Counter({ counter }) {
+
+    return <h1>Cant. movimientos: {count}</h1>;
+  }
+
   return (
     <main>
       <div id="game-container">
+        {/* contador de movimientos */}
+        <div>
+          <Main counter={count} />
+        </div>
         {/* muestra los jugadores */}
         <ol id="players" className="highlight-player"> 
           <Player
@@ -137,7 +148,9 @@ function App() {
          * necesito que cant moviemientos del jugador sea mayor a 1 o que cantidad de movimientos en la grilla supere 2
          * para poder cancelar el juego
         */}
-        <GameAbandonar onRestart={handleRestart} /> // nose donde es que tiene que verificar la cantidad de mov que hubo
+        <button class="btn btn-danger" onclick="cancelJuego()">
+          Cancelar
+        </button>
       </div>
       <Log turns={gameTurns} /> 
 	  {/*
