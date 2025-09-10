@@ -9,7 +9,6 @@ export default function Player({
 }) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
-  const [cantMov, setContador] = useState(0); // cantidad de movimientos del jugador
 
   function handleEditClick() {
     setIsEditing((editing) => !editing); 
